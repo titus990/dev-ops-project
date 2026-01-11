@@ -1,19 +1,13 @@
-# Dockerfile
-# Using Python for simple HTTP server
-FROM python:3.9-alpine
+FROM nginx:alpine
 
-# Set working directory
-WORKDIR /app
+# Remove default nginx content
+RUN rm -rf /usr/share/nginx/html/*
 
-# Copy the HTML file
-COPY boxing-website.html /app/index.html
+# Copy your HTML file
+COPY project.html /usr/share/nginx/html/index.html
 
-# Install Python dependencies (none needed for simple server)
-# Just ensure we have the latest pip
-RUN pip install --no-cache-dir --upgrade pip
+# Expose HTTP port
+EXPOSE 80
 
-# Expose port 8000
-EXPOSE 8000
-
-# Start the Python HTTP server
-CMD ["python", "-m", "http.server", "8000"]
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
