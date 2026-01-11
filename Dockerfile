@@ -1,15 +1,15 @@
 FROM nginx:alpine
 
-# Remove default content
+# Remove default Nginx content
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy your HTML file
+# Copy HTML
 COPY index.html /usr/share/nginx/html/index.html
 
-# Copy Railway-ready Nginx config
+# Copy Railway-ready nginx.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose Railway port
+# Expose any port (Railway sets it dynamically)
 EXPOSE 3000
 
 # Start Nginx
